@@ -50,16 +50,8 @@ const App = () => {
 
     <div className="search">
         <input 
-        placeholder= "Click here to search media" value= {
-            searchTerm}
-        onChange = {
-            searchTerm=""?
-               (e)=>setSearchTerm("Transformers")
-        ):(e)=> setSearchTerm(e.target.value)
-    
-            
-            
-            // (e)=> setSearchTerm(e.target.value)
+        placeholder= "Click here to search media" value= {searchTerm}
+        onChange = {(e)=> setSearchTerm(e.target.value)
             
         }
 
