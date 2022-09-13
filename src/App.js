@@ -22,11 +22,12 @@ const API_URL = 'http://www.omdbapi.com?apikey=63a3e8dd';
 const App = () => {
 
     const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const searchMovies = async(title) =>{
         const response = await fetch(`${API_URL}&s=${title}`);
         const data = await response.json();
+        
 
         console.log(data.Search);
         
@@ -49,8 +50,16 @@ const App = () => {
 
     <div className="search">
         <input 
-        placeholder= "Click here to search media" value= {searchTerm}
-        onChange = {(e)=> setSearchTerm(e.target.value)
+        placeholder= "Click here to search media" value= {
+            searchTerm}
+        onChange = {
+            searchTerm=""?
+               (e)=>setSearchTerm("Transformers")
+        ):(e)=> setSearchTerm(e.target.value)
+    
+            
+            
+            // (e)=> setSearchTerm(e.target.value)
             
         }
 
@@ -73,14 +82,17 @@ const App = () => {
         movies && movies.length > 0
         ?(
          <div className= "container">
-             {movies.map((movie)=> ( 
-                <MediaCard movie = {movie} />
+             {movies.map((movie,i)=> ( 
+                <MediaCard key={i} movie = {movie} />
         ))}
         </div>
 
         ):(
+            
         <div className="empty">
+            
             <h2> There are no movies found, please re-enter search term </h2>
+          
         </div>
         )}
    
