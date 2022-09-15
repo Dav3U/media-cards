@@ -1,15 +1,13 @@
 // import React from 'react';
 /* jshint esversion: 6 */
-import {useEffect, useState} from 'react';
-import MediaCard from './MediaCard';
-import './App.css';
-import SearchIcon from './search.svg';
-
+import { useEffect, useState } from "react";
+import MediaCard from "./MediaCard";
+import "./App.css";
+import SearchIcon from "./search.svg";
 
 //63a3e8dd
 
-
-const API_URL = 'http://www.omdbapi.com?apikey=63a3e8dd';
+const API_URL = "http://www.omdbapi.com?apikey=63a3e8dd";
 
 // const movie1= {
 //         "Title": "Superman, Spiderman or Batman",
@@ -20,78 +18,77 @@ const API_URL = 'http://www.omdbapi.com?apikey=63a3e8dd';
 // }
 
 const App = () => {
+  const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debounceTerm, setDebounceTerm] = useState(searchTerm);
 
-    const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+  const searchMovies = async (title) => {
+    const response = await fetch(`${API_URL}&s=${title}`);
+    const data = await response.json();
 
-    const searchMovies = async(title) =>{
-        const response = await fetch(`${API_URL}&s=${title}`);
-        const data = await response.json();
-        
+    setMovies(data.Search);
+  };
 
-        console.log(data.Search);
-        
-        setMovies(data.Search);
+  // debouncer to delay the searchMovies function for 1 second
+  useEffect(() => {
+    const timerFn = setTimeout(() => {
+      setDebounceTerm(searchTerm);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerFn);
+    };
+  }, [searchTerm]);
+
+  //
+  useEffect(() => {
+    // searchTerm = "Latest Movies"
+    if (!debounceTerm) {
+      console.log("i search transformers");
+      searchMovies("Transformers");
     }
+    if (debounceTerm) {
+      console.log("i search ", debounceTerm);
+      searchMovies(debounceTerm);
+    }
+    // searchMovies(debounceTerm);
+  }, [debounceTerm]);
 
-    useEffect(()=>{
-        // searchTerm = "Latest Movies"
-        searchMovies('Transformers');
-        // searchMovies(searchTerm);
+  return (
+    <div className="app">
+      <h1>Media Hub</h1>
 
-    },[]);
-
-    
-
-    return(
-        <div className="app">
-
-        <h1>Media Hub</h1>
-
-    <div className="search">
-        <input 
-        placeholder= "Click here to search media" value= {searchTerm}
-        onChange = {(e)=> setSearchTerm(e.target.value)
-            
-        }
-
-        
-        onKeyUp ={
-            ()=> searchMovies(searchTerm)
-        }
-       
+      <div className="search">
+        <input
+          placeholder="search movie"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
 
-        <img 
-        src={SearchIcon}
-        alt="Search"
-        // onClick= {
-        // ()=> searchMovies(searchTerm)
-        // }
-    />
-    </div>
-    {
-        movies && movies.length > 0
-        ?(
-         <div className= "container">
-             {movies.map((movie,i)=> ( 
-                <MediaCard key={i} movie = {movie} />
-        ))}
+        <img
+          src={SearchIcon}
+          alt="Search"
+          // onClick= {
+          // ()=> searchMovies(searchTerm)
+          // }
+        />
+      </div>
+      {/* list  */}
+      {movies && movies.length > 0 ? (
+        <div className="container">
+          {movies.map((movie, i) => (
+            <MediaCard key={i} movie={movie} />
+          ))}
         </div>
-
-        ):(
-            
+      ) : (
         <div className="empty">
-            
-            <h2> There are no movies found, please re-enter search term </h2>
-          
+          <h2> There are no movies found, please re-enter search term </h2>
         </div>
-        )}
-   
+      )}
     </div>
-
-        
-    );
-}
+  );
+};
 
 export default App;
