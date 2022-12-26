@@ -2,7 +2,7 @@ import React from "react";
 
 const MediaCard = ({ movie }) => {
   const handleClick = () => {
-    window.open("www.imdb.com/title/" + movie.imdbID);
+    window.open("https://www.imdb.com/title/" + movie.imdbID);
   };
 
   return (
