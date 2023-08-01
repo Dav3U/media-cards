@@ -9,14 +9,6 @@ import SearchIcon from "./search.svg";
 
 const API_URL = "http://www.omdbapi.com?apikey=63a3e8dd";
 
-// const movie1= {
-//         "Title": "Superman, Spiderman or Batman",
-//         "Year": "2011",
-//         "imdbID": "tt2084949",
-//         "Type": "movie",
-//         "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ4MzcxNDU3N15BMl5BanBnXkFtZTgwOTE1MzMxNzE@._V1_SX300.jpg"
-// }
-
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,11 +48,15 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Media Hub</h1>
+      <h1>
+        Dave's Media Hub
+        <img src={require("./popcorn.png")} alt="popcorn" width={"50rem"} />
+      </h1>
+      <i>limitless surfing!</i>
 
       <div className="search">
         <input
-          placeholder="search movie"
+          placeholder="enter a title"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);

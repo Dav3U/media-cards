@@ -14,7 +14,7 @@
 
 body {
   font-family: var(--font-roboto);
-  background-color: #271d2d;
+  background-color: #3b0e53;
   
 }
 
@@ -39,6 +39,10 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   width: fit-content;
+}
+
+i{
+  color: rgb(165, 162, 162);
 }
 
 .search {
