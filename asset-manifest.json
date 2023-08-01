@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/media-cards/static/css/main.bdbfb9c2.css",
+    "main.js": "/media-cards/static/js/main.4597fec5.js",
+    "static/media/popcorn.png": "/media-cards/static/media/popcorn.cba21a09065359ca781a.png",
+    "index.html": "/media-cards/index.html",
+    "static/media/search.svg": "/media-cards/static/media/search.915a54c27b6c6b501ce0c9bf5d482070.svg",
+    "main.bdbfb9c2.css.map": "/media-cards/static/css/main.bdbfb9c2.css.map",
+    "main.4597fec5.js.map": "/media-cards/static/js/main.4597fec5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bdbfb9c2.css",
+    "static/js/main.4597fec5.js"
+  ]
+}
